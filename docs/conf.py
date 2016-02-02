@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
-# ENV835 documentation build configuration file, created by
-# sphinx-quickstart on Tue Feb  2 15:45:13 2016.
+# ENR835 documentation build configuration file, created by
+# sphinx-quickstart on Tue Feb  2 16:22:30 2016.
 #
 # This file is execfile()d with the current directory set to its
 # containing dir.
@@ -30,7 +30,12 @@ import shlex
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = []
+extensions = [
+    'sphinx.ext.autodoc',
+    'sphinx.ext.doctest',
+    'sphinx.ext.todo',
+    'sphinx.ext.pngmath',
+]
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -47,7 +52,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = 'ENV835'
+project = 'ENR835'
 copyright = '2016, Antoine'
 author = 'Antoine'
 
@@ -102,7 +107,7 @@ pygments_style = 'sphinx'
 #keep_warnings = False
 
 # If true, `todo` and `todoList` produce output, else they produce nothing.
-todo_include_todos = False
+todo_include_todos = True
 
 
 # -- Options for HTML output ----------------------------------------------
@@ -201,7 +206,7 @@ html_static_path = ['_static']
 #html_search_scorer = 'scorer.js'
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'ENV835doc'
+htmlhelp_basename = 'ENR835doc'
 
 # -- Options for LaTeX output ---------------------------------------------
 
@@ -223,7 +228,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-  (master_doc, 'ENV835.tex', 'ENV835 Documentation',
+  (master_doc, 'ENR835.tex', 'ENR835 Documentation',
    'Antoine', 'manual'),
 ]
 
@@ -253,7 +258,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'env835', 'ENV835 Documentation',
+    (master_doc, 'enr835', 'ENR835 Documentation',
      [author], 1)
 ]
 
@@ -267,8 +272,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-  (master_doc, 'ENV835', 'ENV835 Documentation',
-   author, 'ENV835', 'One line description of project.',
+  (master_doc, 'ENR835', 'ENR835 Documentation',
+   author, 'ENR835', 'One line description of project.',
    'Miscellaneous'),
 ]
 
