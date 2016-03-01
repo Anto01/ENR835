@@ -1,3 +1,5 @@
+Voici les instructions pour le numéro 1 et 2 du devoir #3.
+
 *Pour ouvrir le script python 3 : Devoir_3.py
 
 *Pour consulter les notes Ipython sur Jupyter : Devoir_3_jupyter
