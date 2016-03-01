@@ -1,0 +1,6 @@
+*Pour ouvrir le script python 3 : Devoir_3.py
+
+*Pour consulter les notes Ipython sur Jupyter : Devoir_3_jupyter
+
+*Pour consulter le fichier Ipython notebook : ipython3/Devoir_3.ipynb
+
