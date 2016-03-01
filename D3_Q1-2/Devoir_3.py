@@ -6,7 +6,7 @@
 
 # ## Modules à importer
 
-# In[9]:
+# In[26]:
 
 # Python
 import numpy as np
@@ -32,7 +32,7 @@ import properties_mod as pm
 # 
 # ### Importation et apperçu des données du devoir #2
 
-# In[10]:
+# In[27]:
 
 data_d2 = pd.read_csv('data_devoir2.csv')
 print(data_d2)
@@ -41,7 +41,7 @@ print(data_d2)
 
 # ### Données du problème
 
-# In[11]:
+# In[28]:
 
 T_pc = 52.0         # Temperature de la plaque (Celsius)
 T_pk = T_pc+273     # Temperature de la plaque (Kelvin)
@@ -58,6 +58,7 @@ n1=1                # indice de réfraction de l'air
 eps_p = 0.17        # Emissivité de la plaque
 eps_c = 0.88         # Emissivitée du verre
 N = 1               # Nombre de vitrage
+# Notes: Nous posons l'hyposthèse que les angles beta et gama du capteur sont les mêmes que ceux du devoir #2
 beta = 60         # Angle à plat
 gam = 0             # plein sud
 phi  = 45.0 +30.0/60.0  # latitude  Montreal (45 deg 30 min nord)
@@ -65,7 +66,7 @@ phi  = 45.0 +30.0/60.0  # latitude  Montreal (45 deg 30 min nord)
 
 # ### Sélection des données de la 12e tranche
 
-# In[12]:
+# In[29]:
 
 tranche = 11
 I = data_d2.I[tranche]
@@ -92,7 +93,7 @@ print('thez = ',thez)
 # ### Calculs du problème
 # #### Calcul des angles réfléchi et diffus
 
-# In[13]:
+# In[30]:
 
 the_g = sm.angle_reflechi(beta)
 the_d = sm.angle_diffus(beta)
@@ -111,7 +112,7 @@ print('the_d = ',the_d)
 
 # #### Calcul du coéfficient absorbeur pour faible longueur d'ondes
 
-# In[14]:
+# In[31]:
 
 tau_al_b = sm.Calcul_tau_al(the,alpha_n,KL,n2,n1,N)
 tau_al_g = sm.Calcul_tau_al(the_g,alpha_n,KL,n2,n1,N)
@@ -124,7 +125,7 @@ print('tau_al_d =', tau_al_d)
 
 # #### Calcul de la radiation totale transmise
 
-# In[15]:
+# In[32]:
 
 Ibt = Ib*tau_al_b
 Idt = Id*tau_al_d
@@ -154,7 +155,7 @@ print('Radiation totale transmise (S) =',S)
 # Pour enfin trouver le coéfficient de température de la face externe du capteur.
 # <img  src="Tc.PNG"/>
 
-# In[17]:
+# In[33]:
 
 
 T_cc = 40 # Température initiale (hypothèse)
@@ -198,6 +199,7 @@ while (abs(T_old-T_cc) > 0.0001):
 q = Ut*(T_pc-T_ac)
 total_iteratif = S-q
 
+
 #plotly.offline.iplot({
 #"data": [{
 #    "x": x_conv,
@@ -222,7 +224,7 @@ print('La température de la surface extérieure =',T_cc,'°C')
 
 # <img  src="uklein.PNG"/>
 
-# In[18]:
+# In[34]:
 
 pertes_empirique_coef = sm.U_Klein(T_pc,T_ac,beta,h_w,eps_p,eps_c,N)
 pertes_empirique = pertes_empirique_coef*(T_pc-T_ac)
@@ -236,7 +238,7 @@ print('Ce qui est capté =',total_empirique, 'W/m²')
 
 # #### Calcul du rendement du capteur
 
-# In[19]:
+# In[35]:
 
 Rendement_empirique = total_empirique/It
 Rendement_iteratif = total_iteratif/It
@@ -246,8 +248,10 @@ print('Le rendement du capteur est de',Rendement_iteratif,'pour la méthode ité
 
 # ### Résultats
 # 
+# Notes: Nous posons l'hyposthèse que les angles beta et gama du capteur sont les mêmes que ceux du devoir #2
+# 
 
-# In[20]:
+# In[36]:
 
 print('a)',S,'J/m²')
 print('b)',q, 'W/m²')
@@ -258,7 +262,7 @@ print('c)',Rendement_iteratif)
 
 # ### Données du problème
 
-# In[21]:
+# In[37]:
 
 H= 0.8
 N=8
@@ -282,14 +286,14 @@ UL=Ut
 
 # <img  src="m.PNG"/>
 
-# In[22]:
+# In[38]:
 
 m = np.sqrt(UL/(ka*deltaa))
 
 
 # <img  src="f.PNG"/>
 
-# In[23]:
+# In[39]:
 
 F = np.tanh((m*(W-D)/2))/(m*(W-D)/2)
 
@@ -297,7 +301,7 @@ F = np.tanh((m*(W-D)/2))/(m*(W-D)/2)
 # #### Calcul du rendement d'absorbeur F'
 # <img  src="Fp.PNG"/>
 
-# In[24]:
+# In[40]:
 
 Fp = (1.0/UL)/(W*(1.0/(UL*(D+(W-D)*F))+Rpjoint+(1.0/(hf*const.pi*D))))
 print('Fp =',Fp)
@@ -306,7 +310,7 @@ print('Fp =',Fp)
 # #### Calcul du rendement d'absorbeur F''
 # <img  src="fpp.PNG"/>
 
-# In[25]:
+# In[41]:
 
 Fpp1 = (mpt*Cp)/(Ac*UL*Fp)
 Fpp2 =  1-np.exp(-(Ac*UL*Fp)/(mpt*Cp))
@@ -318,7 +322,7 @@ print(Fpp)
 
 # <img  src="fr.PNG"/>
 
-# In[26]:
+# In[42]:
 
 Fr = Fpp*Fp
 print(Fr)
@@ -329,7 +333,7 @@ print(Fr)
 # <img  src="tfi.PNG"/>
 # En isolant Tfi de la formule, on obtient,
 
-# In[27]:
+# In[43]:
 
 Qu = Ac*Fr*(S-UL*(Ti-T_ac))
 Tfi = T_pc-((Ac)/(Fr*UL))*(1-Fpp)
@@ -337,18 +341,8 @@ Tfi = T_pc-((Ac)/(Fr*UL))*(1-Fpp)
 
 # ### Résultats
 
-# In[28]:
+# In[44]:
 
 print('a)',Fr)
 print('b)',Tfi,'°C')
-
-
-# In[ ]:
-
-
-
-
-# In[ ]:
-
-
 
